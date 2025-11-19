@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Diário de Bordo</title>
+    <meta name="theme-color" content="#0c63d8" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="styles.min.css" />
+    <!-- Preload da imagem usada como LCP (prioriza carregamento) -->
+    <link
+      rel="preload"
+      as="image"
+      href="icons/left-lake-360.webp"
+      imagesrcset="icons/left-lake-360.webp 360w, icons/left-lake-180.webp 180w"
+      imagesizes="180px"
+    />
+    <!-- CSS crítico inline (melhora FCP/LCP) -->
+    <style>
+      /* crítico: layout inicial e header */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Segoe UI, system-ui, Arial, sans-serif;
+        background: #f8f9ff;
+        color: #1f2937;
+        min-height: 100vh;
+      }
+      .app-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .container {
+        width: 100%;
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 0 16px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Diário de Bordo</h1>
+      <button id="installBtn" class="btn install-btn" hidden>Instalar</button>
+    </header>
+
+    <picture>
+      <source
+        type="image/webp"
+        srcset="icons/left-lake-360.webp 360w, icons/left-lake-180.webp 180w"
+        sizes="180px"
+      />
+      <img
+        id="left-lake"
+        src="icons/left-lake-180.webp"
+        alt="Lago esquerdo"
+        width="180"
+        height="120"
+      />
+    </picture>
+
+    <main class="container">
+      <section class="form-section card">
+        <h2>Nova Entrada</h2>
+        <form id="entryForm">
+          <label for="title">Título</label>
+          <input
+            id="title"
+            name="title"
+            required
+            maxlength="100"
+            placeholder="Ex: Reunião com equipe"
+          />
+          <label for="date">Data</label>
+          <input id="date" name="date" type="date" required />
+          <label for="description">Descrição</label>
+          <textarea
+            id="description"
+            name="description"
+            rows="4"
+            placeholder="Descreva a atividade..."
+            required
+          ></textarea>
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Adicionar</button>
+            <button type="reset" class="btn">Limpar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="list-section card">
+        <h2>Entradas</h2>
+        <ul id="entriesList" class="entries-list" aria-live="polite"></ul>
+        <p id="emptyMsg" class="muted">Nenhuma entrada registrada.</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>Diário de Bordo — Funciona offline • Salvo no dispositivo</small>
+    </footer>
+
+    <script src="script.min.js"></script>
+  </body>
+</html>
